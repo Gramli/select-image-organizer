@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-interface FileUploadButtonProps{
+interface FileUploadButtonStyleProps{
   primary?: boolean;
   width?: string,
   margin?: string,
@@ -9,7 +9,7 @@ interface FileUploadButtonProps{
   topRightRadius?: string
 }
 
-const FileUploadButton = styled.button<FileUploadButtonProps>`
+const FileUploadButtonStyle = styled.button<FileUploadButtonStyleProps>`
   background: ${props => props.primary ? "#1d9410" : "#333"};
   color: #ffffff;
   font-size: 1em;
@@ -25,4 +25,4 @@ const FileUploadButton = styled.button<FileUploadButtonProps>`
     background: ${props => !props.primary ? "#1d9410" : "transparent"};
 }`;
 
-export default FileUploadButton;
+export default FileUploadButtonStyle;

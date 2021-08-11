@@ -1,24 +1,19 @@
-import { useEffect } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FileContent } from "../../models/FileContent";
 import { openFileDialog } from "../extensions/OpenFileDialog";
+import { readFile } from "../extensions/FileReader";
+import ImageCard from "../image-card/ImageCard";
 import Container from "../ui/Container";
-import FileUploadButton from "../ui/FileUploadButton";
-import ImageCard from "../ui/ImageCard";
+import FileUploadButtonStyle from "../ui/FileUploadButtonStyle";
 
 interface FileInputFormProps {
-    onSubmit: () => void;
+    onSubmit: (selectedFiles: FileContent[]) => void;
 }
 
 const FileInputForm: React.FC<FileInputFormProps> = (props) => {
 
     const [selectedImageFiles, setSelectedImageFiles] = useState<File[]>([]);
     const [loadedFiles, setLoadedFiles] = useState<FileContent[]>([]);
-
-    const readFile = async (file: File) => {
-        const buffer = await file.arrayBuffer();
-        return URL.createObjectURL(new Blob([buffer]));
-    }
 
     const openFileDialogtHandler = () => {
         openFileDialog((ev: Event) => {
@@ -43,22 +38,23 @@ const FileInputForm: React.FC<FileInputFormProps> = (props) => {
 
     const onSubmitHandler = (event: React.FormEvent) => {
         event.preventDefault();
-        props.onSubmit();
+        props.onSubmit(loadedFiles);
     }
+
+    const onRemoveHandler = (fileName: string) => {
+        setLoadedFiles((prev) => prev.filter((file) => file.name !== fileName)
+        )
+    };
 
     let content: JSX.Element[] = [];
 
     content = loadedFiles.map((file, index) => {
-        return (<ImageCard key={index}>
-            <img alt={file.name} src={file.content} width={50} height={50}></img>
-            <p>{file.name}</p>
-            <FileUploadButton primary={false}>Remove</FileUploadButton>
-        </ImageCard>);
+        return (<ImageCard index={index} file={file} onRemove={onRemoveHandler} />);
     });
 
     return (<form>
-        <FileUploadButton onClick={openFileDialogtHandler} type="button" width="50%">Select Images</FileUploadButton>
-        <FileUploadButton type="submit" onClick={onSubmitHandler} width="50%">OK</FileUploadButton>
+        <FileUploadButtonStyle onClick={openFileDialogtHandler} type="button" width="50%">Select Images</FileUploadButtonStyle>
+        <FileUploadButtonStyle type="submit" onClick={onSubmitHandler} width="50%">OK</FileUploadButtonStyle>
         <Container>{content}</Container>
     </form>);
 }

@@ -16,7 +16,7 @@ const SelectImageOrganizer: React.FC<SelectImageOrganizerProps> = (props) => {
         <>
             {ReactDOM.createPortal(<Backdrop onClick={props.onCancel} />, props.overlayElement)}
             {ReactDOM.createPortal(<Modal>
-                <FileInputForm onSubmit={()=>{}}/>
+                <FileInputForm onSubmit={props.onSubmit}/>
             </Modal>, props.overlayElement)}
         </>)
 }
