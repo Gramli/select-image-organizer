@@ -46,9 +46,7 @@ const FileInputForm: React.FC<FileInputFormProps> = (props) => {
         )
     };
 
-    let content: JSX.Element[] = [];
-
-    content = loadedFiles.map((file, index) => {
+    const content = loadedFiles.map((file, index) => {
         return (<ImageCard index={index} file={file} onRemove={onRemoveHandler} />);
     });
 
