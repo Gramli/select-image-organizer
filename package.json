@@ -2,29 +2,21 @@
   "name": "select-image-organizer",
   "version": "0.1.0",
   "private": false,
-  "babel": {
-    "presets": [
-      "@babel/preset-react"
-    ]
-  },
   "dependencies": {
-    "@testing-library/jest-dom": "^5.14.1",
-    "@testing-library/react": "^11.2.7",
-    "@testing-library/user-event": "^12.8.3",
     "@types/jest": "^26.0.24",
     "@types/node": "^12.20.19",
-    "@types/react": "^17.0.15",
-    "@types/react-dom": "^17.0.9",
-    "react-scripts": "4.0.3",
-    "typescript": "^4.3.5"
+    "react-scripts": "4.0.3"
   },
   "peerDependencies": {
+    "@types/react": "^17.0.15",
+    "@types/react-dom": "^17.0.9",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "publish:npm": "rm -rf dist && mkdir dist &&  babel src/component -d dist --copy-files"
+    "build": "npm run-script build:esm && npm run-script build:cjs",
+    "build:esm": "tsc",
+    "build:cjs": "tsc --module commonjs --outDir lib/cjs"
   },
   "eslintConfig": {
     "extends": [
@@ -45,11 +37,36 @@
     ]
   },
   "devDependencies": {
-    "@babel/cli": "^7.14.8",
-    "@babel/preset-react": "^7.14.5",
     "@types/styled-components": "^5.1.12",
+    "styled-components": "^5.3.0",
+    "typescript": "^4.3.5",
+    "@types/react": "^17.0.15",
+    "@types/react-dom": "^17.0.9",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "styled-components": "^5.3.0"
-  }
+    "react-dom": "^17.0.2"
+  },
+  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+  "main": "./lib/cjs/index.d.ts",
+  "module": "./lib/esm/index.d.ts",
+  "types": "./lib/esm/index.d.ts",
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Gramli/select-image-organizer.git"
+  },
+  "keywords": [
+    "react",
+    "typescript",
+    "modal",
+    "select",
+    "image"
+  ],
+  "author": "Gramli",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Gramli/select-image-organizer/issues"
+  },
+  "homepage": "https://github.com/Gramli/select-image-organizer#readme"
 }

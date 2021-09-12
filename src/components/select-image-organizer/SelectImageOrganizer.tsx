@@ -5,7 +5,7 @@ import Modal from "../ui/Modal";
 import { FileContent } from "../../models/FileContent";
 import FileInputForm from "../file-input-form/FileInputForm";
 
-interface SelectImageOrganizerProps{
+export interface SelectImageOrganizerProps {
     onCancel: () => void;
     onSubmit: (result: FileContent[]) => void;
     overlayElement: HTMLElement
